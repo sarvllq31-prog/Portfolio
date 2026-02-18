@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sara Ali Alqahtani - Software Engineering Portfolio</title>
+    <meta name="description" content="Software Engineering student portfolio showcasing skills in AI, Data Analysis, and Software Development">
+    <meta property="og:title" content="Sara Ali Alqahtani - Software Engineering Portfolio">
+    <meta property="og:description" content="Software Engineering student portfolio showcasing skills in AI, Data Analysis, and Software Development">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Light Theme - Elegant Pastels */
+            --bg-primary: #FAFBFC;
+            --bg-gradient-start: #F8F9FC;
+            --bg-gradient-mid: #F0F4F8;
+            --bg-gradient-end: #F5F7FA;
+            
+            --accent-primary: #7C9CBF;
+            --accent-secondary: #9BA8C4;
+            --accent-tertiary: #B8A4C9;
+            --accent-mint: #88C0B4;
+            
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --text-muted: #94A3B8;
+            
+            --glass-bg: rgba(255, 255, 255, 0.35);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0F172A;
+            --bg-gradient-start: #1E293B;
+            --bg-gradient-mid: #334155;
+            --bg-gradient-end: #1E293B;
+            
+            --accent-primary: #94B4D4;
+            --accent-secondary: #B4C0D8;
+            --accent-tertiary: #C8B8D9;
+            --accent-mint: #A8D0C4;
+            
+            --text-primary: #F1F5F9;
+            --text-secondary: #CBD5E1;
+            --text-muted: #94A3B8;
+            
+            --glass-bg: rgba(30, 41, 59, 0.4);
+            --glass-border: rgba(148, 163, 184, 0.2);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        body[dir="rtl"] {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* ========== BACKGROUND ANIMATION ========== */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, 
+                var(--bg-gradient-start) 0%, 
+                var(--bg-gradient-mid) 50%, 
+                var(--bg-gradient-end) 100%);
+            background-attachment: fixed;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.05;
+            animation: float 30s infinite ease-in-out;
+            filter: blur(60px);
+            will-change: transform;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-primary), transparent);
+            top: 10%;
+            left: -5%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-tertiary), transparent);
+            top: 40%;
+            right: -10%;
+            animation-delay: 10s;
+        }
+
+        .shape-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--accent-mint), transparent);
+            bottom: 15%;
+            left: 30%;
+            animation-delay: 20s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(40px, -60px) scale(1.1);
+            }
+            66% {
+                transform: translate(-30px, 40px) scale(0.95);
+            }
+        }
+
+        /* ========== NAVBAR ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            backdrop-filter: blur(12px);
+            background: var(--glass-bg);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.75rem 5%;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--accent-primary);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-primary);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .toggle-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ========== SECTIONS ========== */
+        section {
+            min-height: 100vh;
+            padding: 6rem 5% 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* ========== HOME / HERO ========== */
+        #home {
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .social-icon:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            color: var(--accent-primary);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, 
+                var(--accent-primary), 
+                var(--accent-tertiary), 
+                var(--accent-mint),
+                var(--accent-primary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 8s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: var(--text-secondary);
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== ABOUT ========== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .interests-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .interests-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .interest-item {
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--accent-primary);
+            opacity: 0;
+            position: absolute;
+            transition: opacity 0.5s ease;
+        }
+
+        .interest-item.active {
+            opacity: 1;
+            position: relative;
+        }
+
+        /* ========== PORTFOLIO SECTION ========== */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tab-btn.active {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-name {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .project-preview {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* Skills/Certs/Education Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* ========== PROJECT MODAL ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .modal-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.4rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .modal-github {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .modal-github:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ========== CONTACT ========== */
+        #contact {
+            text-align: center;
+        }
+
+        .contact-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 968px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            section {
+                padding: 5rem 5% 3rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" role="navigation">
+        <div class="nav-container">
+            <div class="nav-logo" data-en="Sara Alqahtani" data-ar="ساره القحطاني">Sara Alqahtani</div>
+            
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active" data-en="Home" data-ar="الرئيسية">Home</a></li>
+                <li><a href="#about" class="nav-link" data-en="About" data-ar="نبذة">About</a></li>
+                <li><a href="#portfolio" class="nav-link" data-en="Portfolio" data-ar="أعمالي">Portfolio</a></li>
+                <li><a href="#contact" class="nav-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <button class="toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+                    <span data-en="🌙 Dark" data-ar="🌙 داكن">🌙 Dark</span>
+                </button>
+                <button class="toggle-btn" id="lang-toggle" aria-label="Toggle language">
+                    <span data-en="AR" data-ar="EN">AR</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- HOME SECTION -->
+        <section id="home">
+            <div class="container">
+                <div class="social-icons">
+                    <a href="https://linkedin.com/in/sara-alqahtani" target="_blank" class="social-icon" aria-label="LinkedIn">
+                        💼
+                    </a>
+                    <a href="mailto:sara.alqahtani@email.com" class="social-icon" aria-label="Email">
+                        📧
+                    </a>
+                    <a href="https://github.com/sara-alqahtani" target="_blank" class="social-icon" aria-label="GitHub">
+                        💻
+                    </a>
+                </div>
+
+                <h1 class="hero-title" data-en="Welcome to my portfolio" data-ar="مرحباً بك في معرض أعمالي">
+                    Welcome to my portfolio
+                </h1>
+                <p class="hero-subtitle" data-en="Software Engineering student passionate about AI, Data Analysis, and building impactful solutions" data-ar="طالبة هندسة برمجيات متحمسة للذكاء الاصطناعي وتحليل البيانات وبناء حلول مؤثرة">
+                    Software Engineering student passionate about AI, Data Analysis, and building impactful solutions
+                </p>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title" data-en="About Me" data-ar="نبذة عني">About Me</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p data-en="I'm Sara, a final-semester Software Engineering student seeking internship opportunities. I'm passionate about leveraging technology to solve real-world problems, with a focus on AI and data-driven solutions. This portfolio showcases my journey, skills, and projects as I prepare to enter the professional world." data-ar="أنا ساره، طالبة في الفصل الأخير من هندسة البرمجيات وأبحث عن فرص تدريب. أهتم بتوظيف التقنية لحل المشاكل الحقيقية، مع التركيز على الذكاء الاصطناعي والحلول المعتمدة على البيانات. يعرض هذا المعرض رحلتي ومهاراتي ومشاريعي وأنا أستعد لدخول العالم المهني.">
+                            I'm Sara, a final-semester Software Engineering student seeking internship opportunities. I'm passionate about leveraging technology to solve real-world problems, with a focus on AI and data-driven solutions. This portfolio showcases my journey, skills, and projects as I prepare to enter the professional world.
+                        </p>
+                    </div>
+                    <div class="interests-box">
+                        <div class="interests-label" data-en="Interested in" data-ar="مهتمة بـ">Interested in</div>
+                        <div id="interests-display">
+                            <div class="interest-item active">AI</div>
+                            <div class="interest-item">Data Analysis</div>
+                            <div class="interest-item">Software Engineering</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO SECTION -->
+        <section id="portfolio">
+            <div class="container">
+                <h2 class="section-title" data-en="Portfolio" data-ar="معرض الأعمال">Portfolio</h2>
+                
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="skills" data-en="Skills" data-ar="المهارات">Skills</button>
+                    <button class="tab-btn" data-tab="certificates" data-en="Certificates" data-ar="الشهادات">Certificates</button>
+                    <button class="tab-btn" data-tab="projects" data-en="Projects" data-ar="المشاريع">Projects</button>
+                    <button class="tab-btn" data-tab="education" data-en="Education" data-ar="التعليم">Education</button>
+                </div>
+
+                <!-- Skills Tab -->
+                <div class="tab-content active" id="skills-tab">
+                    <div class="grid">
+                        <div class="card">
+                            <h3 class="card-title">Python</h3>
+                            <p class="card-subtitle" data-en="Advanced" data-ar="متقدم">Advanced</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title" data-en="Machine Learning" data-ar="التعلم الآلي">Machine Learning</h3>
+                            <p class="card-subtitle" data-en="Intermediate" data-ar="متوسط">Intermediate</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title" data-en="Data Analysis" data-ar="تحليل البيانات">Data Analysis</h3>
+                            <p class="card-subtitle" data-en="Advanced" data-ar="متقدم">Advanced</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificates Tab -->
+                <div class="tab-content" id="certificates-tab">
+                    <div class="grid">
+                        <div class="card">
+                            <h3 class="card-title" data-en="AI Certificate" data-ar="شهادة الذكاء الاصطناعي">AI Certificate</h3>
+                            <p class="card-subtitle" data-en="Institution Name" data-ar="اسم المؤسسة">Institution Name</p>
+                        </div>
+                        <div class="card">
+                            <h3 class="card-title" data-en="Data Analysis Certificate" data-ar="شهادة تحليل البيانات">Data Analysis Certificate</h3>
+                            <p class="card-subtitle" data-en="Institution Name" data-ar="اسم المؤسسة">Institution Name</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Tab -->
+                <div class="tab-content" id="projects-tab">
+                    <div class="projects-grid" id="projects-grid"></div>
+                </div>
+
+                <!-- Education Tab -->
+                <div class="tab-content" id="education-tab">
+                    <div class="grid">
+                        <div class="card">
+                            <h3 class="card-title" data-en="Bachelor of Software Engineering" data-ar="بكالوريوس هندسة البرمجيات">Bachelor of Software Engineering</h3>
+                            <p class="card-subtitle" data-en="University Name - Final Semester" data-ar="اسم الجامعة - الفصل الأخير">University Name - Final Semester</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title" data-en="Get In Touch" data-ar="تواصل معي">Get In Touch</h2>
+                <p class="contact-text" data-en="Feel free to reach out for internship opportunities or collaboration" data-ar="لا تتردد في التواصل لفرص التدريب أو التعاون">
+                    Feel free to reach out for internship opportunities or collaboration
+                </p>
+                <div class="social-icons">
+                    <a href="https://linkedin.com/in/sara-alqahtani" target="_blank" class="social-icon" aria-label="LinkedIn">
+                        💼
+                    </a>
+                    <a href="mailto:sara.alqahtani@email.com" class="social-icon" aria-label="Email">
+                        📧
+                    </a>
+                    <a href="https://github.com/sara-alqahtani" target="_blank" class="social-icon" aria-label="GitHub">
+                        💻
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Project Modal -->
+    <div class="modal" id="project-modal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">×</button>
+            <h3 class="modal-title" id="modal-title"></h3>
+            <p class="modal-description" id="modal-description"></p>
+            <div class="modal-tags" id="modal-tags"></div>
+            <a href="#" id="modal-github" class="modal-github" target="_blank">
+                💻 <span data-en="View on GitHub" data-ar="عرض في GitHub">View on GitHub</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // ========== PROJECTS DATA ==========
+        const projectsData = [
+            {
+                name: "Project Name 1",
+                nameAr: "اسم المشروع 1",
+                preview: "Brief project description",
+                previewAr: "وصف مختصر للمشروع",
+                description: "Detailed project description goes here. Add information about goals, challenges, and outcomes.",
+                descriptionAr: "وصف تفصيلي للمشروع هنا. أضف معلومات عن الأهداف والتحديات والنتائج.",
+                technologies: ["Python", "TensorFlow", "Pandas"],
+                github: "https://github.com/sara-alqahtani/project1"
+            },
+            {
+                name: "Project Name 2",
+                nameAr: "اسم المشروع 2",
+                preview: "Brief project description",
+                previewAr: "وصف مختصر للمشروع",
+                description: "Detailed project description goes here. Add information about goals, challenges, and outcomes.",
+                descriptionAr: "وصف تفصيلي للمشروع هنا. أضف معلومات عن الأهداف والتحديات والنتائج.",
+                technologies: ["Python", "Scikit-learn", "Matplotlib"],
+                github: "https://github.com/sara-alqahtani/project2"
+            }
+        ];
+
+        // ========== STATE MANAGEMENT ==========
+        let currentLang = localStorage.getItem('lang') || 'en';
+        let currentTheme = localStorage.getItem('theme') || 'light';
+        let hasAutoScrolled = localStorage.getItem('hasAutoScrolled') === 'true';
+
+        // ========== INITIALIZATION ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTheme();
+            initializeLanguage();
+            initializeNavigation();
+            initializeTabs();
+            renderProjects();
+            initializeInterestsRotation();
+            initializeProjectModal();
+            
+            // Auto-scroll after 2.5 seconds on first visit
+            if (!hasAutoScrolled) {
+                setTimeout(() => {
+                    document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+                    localStorage.setItem('hasAutoScrolled', 'true');
+                }, 2500);
+            }
+        });
+
+        // ========== THEME ==========
+        function initializeTheme() {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            updateThemeButton();
+        }
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            updateThemeButton();
+        }
+
+        function updateThemeButton() {
+            const btn = document.getElementById('theme-toggle');
+            const span = btn.querySelector('span');
+            if (currentTheme === 'dark') {
+                span.setAttribute('data-en', '☀️ Light');
+                span.setAttribute('data-ar', '☀️ فاتح');
+                span.textContent = currentLang === 'en' ? '☀️ Light' : '☀️ فاتح';
+            } else {
+                span.setAttribute('data-en', '🌙 Dark');
+                span.setAttribute('data-ar', '🌙 داكن');
+                span.textContent = currentLang === 'en' ? '🌙 Dark' : '🌙 داكن';
+            }
+        }
+
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+        // ========== LANGUAGE ==========
+        function initializeLanguage() {
+            document.documentElement.lang = currentLang;
+            document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            updateAllText();
+            updateLangButton();
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            document.documentElement.lang = currentLang;
+            document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            localStorage.setItem('lang', currentLang);
+            updateAllText();
+            updateLangButton();
+            renderProjects(); // Re-render projects with new language
+        }
+
+        function updateAllText() {
+            document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${currentLang}`);
+            });
+        }
+
+        function updateLangButton() {
+            const btn = document.getElementById('lang-toggle');
+            btn.querySelector('span').textContent = currentLang === 'en' ? 'AR' : 'EN';
+        }
+
+        document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
+
+        // ========== NAVIGATION ==========
+        function initializeNavigation() {
+            const navbar = document.getElementById('navbar');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // Scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+
+                // Active section highlight
+                let current = '';
+                document.querySelectorAll('section').forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // ========== TABS ==========
+        function initializeTabs() {
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-tab');
+                    
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    btn.classList.add('active');
+                    document.getElementById(`${target}-tab`).classList.add('active');
+                });
+            });
+        }
+
+        // ========== PROJECTS ==========
+        function renderProjects() {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = '';
+            
+            projectsData.forEach((project, index) => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <h3 class="project-name">${currentLang === 'en' ? project.name : project.nameAr}</h3>
+                    <p class="project-preview">${currentLang === 'en' ? project.preview : project.previewAr}</p>
+                `;
+                card.addEventListener('click', () => openProjectModal(project));
+                grid.appendChild(card);
+            });
+        }
+
+        function initializeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            const closeBtn = modal.querySelector('.modal-close');
+            
+            closeBtn.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        }
+
+        function openProjectModal(project) {
+            const modal = document.getElementById('project-modal');
+            const title = document.getElementById('modal-title');
+            const description = document.getElementById('modal-description');
+            const tags = document.getElementById('modal-tags');
+            const github = document.getElementById('modal-github');
+
+            title.textContent = currentLang === 'en' ? project.name : project.nameAr;
+            description.textContent = currentLang === 'en' ? project.description : project.descriptionAr;
+            
+            tags.innerHTML = '';
+            project.technologies.forEach(tech => {
+                const tag = document.createElement('span');
+                tag.className = 'tag';
+                tag.textContent = tech;
+                tags.appendChild(tag);
+            });
+
+            github.href = project.github;
+            modal.classList.add('active');
+        }
+
+        // ========== INTERESTS ROTATION ==========
+        function initializeInterestsRotation() {
+            const items = document.querySelectorAll('.interest-item');
+            let currentIndex = 0;
+
+            setInterval(() => {
+                items[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % items.length;
+                items[currentIndex].classList.add('active');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
