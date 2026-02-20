@@ -299,6 +299,29 @@ section {
     animation: gradient-shift 8s ease infinite;
 }
 
+.hero-title.typing {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid var(--accent-primary);
+    width: 0;
+    animation: typing 3s steps(30) forwards, gradient-shift 8s ease infinite, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
 @keyframes gradient-shift {
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -310,7 +333,10 @@ section {
     font-weight: 300;
     margin-bottom: 2rem;
     opacity: 0;
-    animation: fadeInUp 1s ease 0.5s forwards;
+}
+
+.hero-subtitle.animate {
+    animation: fadeInUp 1s ease forwards;
 }
 
 @keyframes fadeInUp {
@@ -353,6 +379,13 @@ section {
     justify-content: center;
 }
 
+#interests-display {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .interests-label {
     font-size: 0.9rem;
     color: var(--text-muted);
@@ -360,17 +393,34 @@ section {
 }
 
 .interest-item {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 500;
     color: var(--accent-primary);
     opacity: 0;
-    position: absolute;
-    transition: opacity 0.5s ease;
+    transform: translateY(-20px);
 }
 
-.interest-item.active {
-    opacity: 1;
-    position: relative;
+.interest-item.animate {
+    animation: slideDown 0.6s ease forwards;
+}
+
+.interest-item.animate:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.interest-item.animate:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.interest-item.animate:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes slideDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ========== PORTFOLIO SECTION ========== */
@@ -480,11 +530,29 @@ section {
     padding: 2rem;
     box-shadow: var(--shadow-sm);
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-md);
+}
+
+.card.clickable {
+    cursor: pointer;
+}
+
+.card.clickable:hover {
+    border-color: var(--accent-primary);
+}
+
+.card-date {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 400;
 }
 
 .card-title {
@@ -525,11 +593,56 @@ section {
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     padding: 2.5rem;
-    max-width: 600px;
+    max-width: 800px;
     width: 100%;
     box-shadow: var(--shadow-lg);
     position: relative;
     animation: slideUp 0.3s ease;
+}
+
+.modal-body {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    gap: 2rem;
+    align-items: start;
+}
+
+.modal-info {
+    min-width: 0;
+}
+
+.modal-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid var(--glass-border);
+    box-shadow: var(--shadow-md);
+}
+
+.modal-image-placeholder {
+    width: 250px;
+    height: 250px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(124, 156, 191, 0.2), rgba(184, 164, 201, 0.2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    border: 2px dashed var(--glass-border);
+}
+
+@media (max-width: 768px) {
+    .modal-body {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-image,
+    .modal-image-placeholder {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
 }
 
 @keyframes slideUp {
@@ -576,7 +689,7 @@ section {
 .modal-description {
     font-size: 1rem;
     line-height: 1.7;
-    color: var(--text-secondary);
+    color: var(--text-primary);
     margin-bottom: 1.5rem;
 }
 

@@ -1,25 +1,52 @@
 // ========== PROJECTS DATA ==========
 const projectsData = [
     {
-        name: "Project Name 1",
-        nameAr: "اسم المشروع 1",
-        preview: "Brief project description",
-        previewAr: "وصف مختصر للمشروع",
-        description: "Detailed project description goes here. Add information about goals, challenges, and outcomes.",
-        descriptionAr: "وصف تفصيلي للمشروع هنا. أضف معلومات عن الأهداف والتحديات والنتائج.",
-        technologies: ["Python", "TensorFlow", "Pandas"],
-        github: "https://github.com/sara-alqahtani/project1"
+        name: "AI-Powered ECG Monitoring & Arrhythmia Detection",
+        nameAr: "نظام مراقبة ECG وكشف اضطرابات النظم بالذكاء الاصطناعي",
+        preview: "AI system that analyzes ECG signals to detect arrhythmias and support early screening",
+        previewAr: "نظام ذكاء اصطناعي يحلل إشارات ECG لاكتشاف اضطرابات النظم ودعم الكشف المبكر.",
+        description: "Developed an AI-powered solution for ECG monitoring and arrhythmia detection. The project focused on preprocessing ECG signals, training and evaluating a classification model, and presenting results that support early screening. Key work included preparing the dataset, improving signal quality, and validating performance using standard evaluation metrics..",
+        descriptionAr: "وتطوير حل يعتمد على الذكاء الاصطناعي لمراقبة إشارات ECG  اكتشاف اضطرابات نظم القلب. ركّز المشروع على معالجة الإشارة وتنظيف البيانات، تدريب وتقييم نموذج تصنيف، وعرض نتائج تساعد على الكشف المبكر. شمل العمل تجهيز مجموعة البيانات، تحسين جودة الإشارة، والتحقق من الأداء باستخدام مقاييس تقييم معتمدة.",
+        technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Scikit-learn"],
+        github: "https://github.com/sara-alqahtani/project1",
+        image: "" // ضعي مسار الصورة هنا مثل: "images/project1.jpg"
     },
     {
-        name: "Project Name 2",
-        nameAr: "اسم المشروع 2",
-        preview: "Brief project description",
-        previewAr: "وصف مختصر للمشروع",
-        description: "Detailed project description goes here. Add information about goals, challenges, and outcomes.",
-        descriptionAr: "وصف تفصيلي للمشروع هنا. أضف معلومات عن الأهداف والتحديات والنتائج.",
-        technologies: ["Python", "Scikit-learn", "Matplotlib"],
-        github: "https://github.com/sara-alqahtani/project2"
+        name: "Rafiq – Smart Islamic Companion",
+        nameAr: "رفيق – المرافق الإسلامي الذكي",
+        preview: "A mobile application that supports daily Islamic practices through prayer times, adhkar reminders, and smart assistance features.",
+        previewAr: "تطبيق يساعد المستخدمين على تنظيم عباداتهم اليومية من خلال مواقيت الصلاة، الأذكار، وميزات ذكية مساعدة.",
+        description: "Developed a mobile application designed to support daily Islamic practices and enhance spiritual routines. The app provides accurate prayer times, adhkar reminders, and guided daily supplications within a clean and user-friendly interface. The project focused on usability, structured navigation, and performance optimization to ensure a smooth user experience. Additional features included smart notifications and AI-assisted responses to provide helpful and relevant guidance.",
+        descriptionAr: "تم تطوير تطبيق جوال يهدف إلى دعم العبادات اليومية وتعزيز الروتين الروحي للمستخدمين. يوفر التطبيق مواقيت صلاة دقيقة، تذكيرات بالأذكار، وأدعية يومية ضمن واجهة سهلة الاستخدام ومنظمة. ركز المشروع على سهولة الاستخدام، تنظيم التنقل داخل التطبيق، وتحسين الأداء لضمان تجربة سلسة. كما يتضمن إشعارات ذكية وميزات مدعومة بالذكاء الاصطناعي لتقديم إرشادات مفيدة وملائمة.",
+        technologies: ["Flutter", "Dart", "Local Notifications", "API Integration", "AI-assisted features"],
+        github: "https://github.com/sara-alqahtani/project2",
+        image: "" // ضعي مسار الصورة هنا
     }
+];
+
+// ========== CERTIFICATES DATA ==========
+const certificatesData = [
+    {
+        title: "Fundamentals of Artificial Intelligence",
+        titleAr: "أساسيات الذكاء الاصطناعي",
+        institution: "SDAIA",
+        institutionAr: "سدايا",
+        file: "" // ضعي مسار ملف PDF أو صورة الشهادة هنا مثل: "certificates/ai-cert.pdf"
+    },
+    {
+        title: "Artificial Intelligence Concepts and Advanced Applications",
+        titleAr: "مفاهيم الذكاء الاصطناعي وتطبيقاته المتقدمة",
+        institution: "SDAIA",
+        institutionAr: "سدايا",
+        file: "" // ضعي مسار الملف هنا
+    },
+        {
+        title: "Introduction to Data Science",
+        titleAr: "مقدمة في علم البيانات",
+        institution: "Cisco Network Academy",
+        institutionAr: "سيسكو",
+        file: "" // ضعي مسار ملف PDF أو صورة الشهادة هنا مثل: "certificates/ai-cert.pdf"
+    },
 ];
 
 // ========== STATE MANAGEMENT ==========
@@ -34,16 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeNavigation();
     initializeTabs();
     renderProjects();
-    initializeInterestsRotation();
+    renderCertificates();
     initializeProjectModal();
+    initializeScrollAnimations();
     
-    // Auto-scroll after 2.5 seconds on first visit
-    if (!hasAutoScrolled) {
-        setTimeout(() => {
-            document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-            localStorage.setItem('hasAutoScrolled', 'true');
-        }, 2500);
-    }
+    // Auto-scroll after 2.5 seconds on first visit - REMOVED
+    // Now animations trigger when you actually see the section
 });
 
 // ========== THEME ==========
@@ -193,9 +216,17 @@ function openProjectModal(project) {
     const description = document.getElementById('modal-description');
     const tags = document.getElementById('modal-tags');
     const github = document.getElementById('modal-github');
+    const imageContainer = document.getElementById('modal-image-container');
 
     title.textContent = currentLang === 'en' ? project.name : project.nameAr;
     description.textContent = currentLang === 'en' ? project.description : project.descriptionAr;
+    
+    // Handle project image
+    if (project.image) {
+        imageContainer.innerHTML = `<img src="${project.image}" alt="${project.name}" class="modal-image">`;
+    } else {
+        imageContainer.innerHTML = `<div class="modal-image-placeholder">📸</div>`;
+    }
     
     tags.innerHTML = '';
     project.technologies.forEach(tech => {
@@ -209,14 +240,107 @@ function openProjectModal(project) {
     modal.classList.add('active');
 }
 
-// ========== INTERESTS ROTATION ==========
-function initializeInterestsRotation() {
-    const items = document.querySelectorAll('.interest-item');
-    let currentIndex = 0;
+// ========== INTERESTS - Static Display ==========
+// Interests now display all at once without rotation
 
-    setInterval(() => {
-        items[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % items.length;
-        items[currentIndex].classList.add('active');
-    }, 3000);
+// ========== SCROLL-TRIGGERED ANIMATIONS ==========
+function initializeScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.3, // يشتغل لما 30% من العنصر يظهر
+        rootMargin: '0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Hero title typing effect
+                if (entry.target.classList.contains('hero-title')) {
+                    entry.target.classList.add('typing');
+                }
+                
+                // Hero subtitle fade in
+                if (entry.target.classList.contains('hero-subtitle')) {
+                    setTimeout(() => {
+                        entry.target.classList.add('animate');
+                    }, 2000); // بعد ما يخلص الـ typing
+                }
+                
+                // Interests animation
+                if (entry.target.id === 'interests-display') {
+                    const items = entry.target.querySelectorAll('.interest-item');
+                    items.forEach(item => item.classList.add('animate'));
+                }
+                
+                // Section title animations
+                if (entry.target.classList.contains('section-title')) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+                
+                // Cards animations
+                if (entry.target.classList.contains('card') || 
+                    entry.target.classList.contains('project-card')) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Observe hero elements
+    const heroTitle = document.querySelector('.hero-title');
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    if (heroTitle) observer.observe(heroTitle);
+    if (heroSubtitle) observer.observe(heroSubtitle);
+    
+    // Observe interests
+    const interestsDisplay = document.getElementById('interests-display');
+    if (interestsDisplay) observer.observe(interestsDisplay);
+    
+    // Observe section titles
+    document.querySelectorAll('.section-title').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
+    
+    // Observe cards
+    document.querySelectorAll('.card, .project-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'all 0.5s ease';
+        observer.observe(el);
+    });
 }
+
+// ========== CERTIFICATES ==========
+function renderCertificates() {
+    const container = document.getElementById('certificates-container');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    certificatesData.forEach(cert => {
+        const card = document.createElement('div');
+        card.className = 'card clickable';
+        card.innerHTML = `
+            <h3 class="card-title">${currentLang === 'en' ? cert.title : cert.titleAr}</h3>
+            <p class="card-subtitle">${currentLang === 'en' ? cert.institution : cert.institutionAr}</p>
+        `;
+        
+        if (cert.file) {
+            card.addEventListener('click', () => {
+                window.open(cert.file, '_blank');
+            });
+        }
+        
+        container.appendChild(card);
+    });
+}
+
+// Call render certificates on initialization
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing code
+    renderCertificates();
+});
