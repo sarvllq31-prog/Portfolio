@@ -3,9 +3,21 @@
 // ============================================
 
 let currentUser = null;
+let supabase;
+
+// Initialize Supabase
+function initSupabase() {
+    const { createClient } = window.supabase;
+    supabase = createClient(
+        window.SUPABASE_CONFIG.url,
+        window.SUPABASE_CONFIG.anonKey
+    );
+    console.log('✅ Admin Supabase initialized');
+}
 
 // ========== INITIALIZATION ==========
 document.addEventListener('DOMContentLoaded', () => {
+    initSupabase();
     checkAuth();
     initializeTabs();
     initializeLogout();
@@ -66,7 +78,6 @@ function initializeLogout() {
     });
 }
 
-// ========== TABS ==========
 function initializeTabs() {
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -81,7 +92,6 @@ function initializeTabs() {
     });
 }
 
-// ========== LOAD ALL DATA ==========
 async function loadAllDashboardData() {
     await loadAboutData();
     await loadInterestsData();
@@ -92,7 +102,6 @@ async function loadAllDashboardData() {
     await loadContactData();
 }
 
-// ========== ABOUT ==========
 async function loadAboutData() {
     const { data } = await supabase.from('about').select('*').single();
     if (data) {
@@ -117,7 +126,6 @@ async function saveAbout() {
     }
 }
 
-// ========== INTERESTS ==========
 async function loadInterestsData() {
     const { data } = await supabase.from('interests').select('*').order('display_order');
     const list = document.getElementById('interests-list');
@@ -162,12 +170,10 @@ async function addInterest() {
 
 async function deleteInterest(id) {
     if (!confirm('هل أنت متأكد؟')) return;
-    
     await supabase.from('interests').delete().eq('id', id);
     loadInterestsData();
 }
 
-// ========== SKILLS ==========
 async function loadSkillsData() {
     const { data } = await supabase.from('skills').select('*').order('display_order');
     const list = document.getElementById('skills-list');
@@ -219,7 +225,6 @@ async function deleteSkill(id) {
     loadSkillsData();
 }
 
-// ========== CERTIFICATES ==========
 async function loadCertificatesData() {
     const { data } = await supabase.from('certificates').select('*').order('display_order');
     const list = document.getElementById('certificates-list');
@@ -297,7 +302,6 @@ async function deleteCertificate(id) {
     loadCertificatesData();
 }
 
-// ========== PROJECTS ==========
 async function loadProjectsData() {
     const { data } = await supabase.from('projects').select('*').order('display_order');
     const list = document.getElementById('projects-list');
@@ -389,7 +393,6 @@ async function deleteProject(id) {
     loadProjectsData();
 }
 
-// ========== EDUCATION ==========
 async function loadEducationData() {
     const { data } = await supabase.from('education').select('*').order('display_order');
     const list = document.getElementById('education-list');
@@ -448,7 +451,6 @@ async function deleteEducation(id) {
     loadEducationData();
 }
 
-// ========== CONTACT ==========
 async function loadContactData() {
     const { data } = await supabase.from('contact').select('*').single();
     if (data) {
