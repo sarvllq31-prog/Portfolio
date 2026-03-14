@@ -1,3 +1,4 @@
+import GlobalBackground from '../components/layout/GlobalBackground'
 import Navbar from '../components/layout/Navbar'
 import Hero from '../components/portfolio/Hero'
 import About from '../components/portfolio/About'
@@ -10,6 +11,7 @@ import Contact from '../components/portfolio/Contact'
 export default function Portfolio() {
   return (
     <div className="min-h-screen">
+      <GlobalBackground />
       <Navbar />
       <Hero />
       <About />

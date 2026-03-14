@@ -17,7 +17,6 @@ export default function Certificates() {
 
   return (
     <section id="certificates" className="section-padding relative overflow-hidden">
-      <div className="absolute inset-0 mesh-bg opacity-20 pointer-events-none" />
       <div className="container-max relative">
         <AnimatedSection>
           <h2 className="text-4xl sm:text-5xl font-black text-center mb-16">
