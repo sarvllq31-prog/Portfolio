@@ -1,0 +1,357 @@
+Important context
+
+The project is already connected to Supabase
+
+It is already deployed on Vercel
+
+Source code is on GitHub
+
+The website should support Arabic and English
+
+The portfolio and dashboard must feel like one consistent design system
+
+Main goals
+1) Redesign the portfolio UI professionally
+
+The current design has too many boxes/cards everywhere and it feels heavy and repetitive.
+I want a cleaner, more premium, more modern layout.
+
+Design direction
+
+Do NOT overuse boxes/cards
+
+Use a more elegant layout with better spacing and hierarchy
+
+Keep cards only where they are truly needed
+
+Make the page feel smooth, premium, and visually impressive
+
+Add more animation across the whole website
+
+Use beautiful motion, not random motion
+
+Use section reveal animations, hover effects, smooth transitions, and a strong animated background
+
+The background animation should stay visually attractive while scrolling
+
+Make the design feel modern and alive, not static
+
+Specific note about “Interested In”
+
+The current “Interested In” section design is bad.
+I do NOT want it as a simple ugly box.
+
+Please redesign this section in a much better way:
+
+more creative layout
+
+cleaner visual treatment
+
+better icon presentation
+
+modern animated look
+
+no boring basic container
+
+You can turn it into something like:
+
+floating tags
+
+animated icon cluster
+
+orbit layout
+
+elegant pill-based layout
+
+premium visual group
+
+Choose the best-looking option.
+
+2) Make the dashboard match the portfolio design
+
+The dashboard currently feels separate and inconsistent.
+
+I want the dashboard design to use the same visual identity as the portfolio, including:
+
+same color system
+
+same dark/light mode style
+
+same typography feel
+
+same animation language
+
+same premium aesthetic
+
+The dashboard should look like it belongs to the same product, not a different website.
+
+3) Add Arabic and English support everywhere
+
+I need full bilingual support for:
+
+Portfolio website
+
+Admin dashboard
+
+Requirements:
+
+Arabic / English toggle
+
+Proper RTL support for Arabic
+
+Proper LTR support for English
+
+All labels, buttons, forms, sections, dashboard menus, and messages must support both languages
+
+Clean language switching logic
+
+4) Fix dashboard functionality completely
+
+The dashboard is currently broken.
+
+Current problems:
+
+If I add something, it does not get added
+
+Existing items cannot be edited
+
+Old content cannot be updated
+
+CRUD operations are not working correctly
+
+I need you to fully fix:
+
+Create
+
+Read
+
+Update
+
+Delete
+
+for all dashboard content.
+
+This includes:
+
+Skills
+
+Certificates
+
+Projects
+
+Education
+
+About section
+
+Interests
+
+Contact information
+
+Fix all of the following:
+
+form submission logic
+
+Supabase insert/update/delete queries
+
+fetching and refreshing data after actions
+
+edit forms not loading old values properly
+
+image/file upload issues
+
+validation and error messages
+
+loading states
+
+success feedback messages
+
+5) Fix data management properly
+
+I want the dashboard to be truly usable.
+
+Required behavior:
+
+When I add a new item, it should appear immediately
+
+When I edit an old item, the changes must save correctly
+
+When I delete an item, it should disappear correctly
+
+Existing data must load into the edit form
+
+Uploaded images/files must be stored and linked correctly
+
+The UI must refresh automatically after each action
+
+6) Improve portfolio content presentation
+
+I want the content sections to feel polished and premium.
+
+Home
+
+Keep it elegant
+
+Strong hero section
+
+Better animation
+
+Better composition
+
+Contact preview visible in a clean way
+
+About
+
+Better layout
+
+Better readability
+
+Better section animation
+
+Skills
+
+Keep them visually attractive
+
+Avoid clutter
+
+Use elegant progress presentation
+
+Certificates
+
+Clean premium cards only if needed
+
+Better viewer/modal experience
+
+Projects
+
+Better project cards
+
+Better project modal
+
+Clear tools, description, links, and images
+
+Smooth motion
+
+Education
+
+Better than simple repetitive cards
+
+Consider timeline or elegant structured layout
+
+Contact
+
+Keep contact in hero and footer
+
+Make it look intentional and polished
+
+7) Animation requirements
+
+I want animation to be one of the strongest parts of the design.
+
+Add:
+
+animated background
+
+smooth section entrance animations
+
+hover interactions
+
+modal transitions
+
+navbar transitions
+
+button micro-interactions
+
+scroll-based motion
+
+loading animations
+
+subtle premium effects throughout the experience
+
+Do not make the animations annoying or too heavy.
+Make them premium, smooth, and modern.
+
+8) Technical requirements
+
+Please review and fix the project architecture if needed.
+
+Use:
+
+React + Vite
+
+Tailwind CSS
+
+Framer Motion
+
+Supabase
+
+React Router
+
+Make sure:
+
+code is clean and modular
+
+dashboard forms are reusable
+
+bilingual content is handled properly
+
+auth/session logic is stable
+
+CRUD logic is correct
+
+components are responsive
+
+9) Authentication and dashboard access
+
+Also verify dashboard access and auth flow.
+
+Check:
+
+login flow
+
+protected dashboard routes
+
+session persistence
+
+redirect after login
+
+logout behavior
+
+10) Final deliverables
+
+I want you to return:
+
+improved portfolio UI
+
+improved dashboard UI
+
+full dashboard CRUD fixes
+
+Arabic/English support
+
+matching design system between portfolio and dashboard
+
+better animations
+
+fixed Supabase integration
+
+clear explanation of what was changed
+
+Most important summary
+
+Please focus on these priorities:
+
+Do not overuse boxes/cards
+
+Make the design cleaner and more premium
+
+Improve the “Interested In” section completely
+
+Add strong beautiful animations
+
+Make dashboard design match portfolio design
+
+Add Arabic and English
+
+Fix dashboard CRUD fully
+
+Make adding/editing old content actually work
