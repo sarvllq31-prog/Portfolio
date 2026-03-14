@@ -1,225 +1,205 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarah Ali Alqahtani - Software Engineering Portfolio</title>
-    <meta name="description" content="Software Engineering student portfolio showcasing skills in AI, Data Analysis, and Software Development">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <!-- External CSS -->
+    <title>Sarah Ali Alqahtani - Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- Background Animation -->
+<body class="light-mode" dir="ltr">
+    
+    <!-- Animated Background -->
     <div class="bg-animation">
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
+        <div class="gradient-bg"></div>
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav id="navbar" role="navigation">
-        <div class="nav-container">
-            <div class="nav-logo" data-en="Sarah Alqahtani" data-ar="ساره القحطاني">Sarah Alqahtani</div>
-            
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active" data-en="Home" data-ar="الرئيسية">Home</a></li>
-                <li><a href="#about" class="nav-link" data-en="About" data-ar="نبذة">About</a></li>
-                <li><a href="#portfolio" class="nav-link" data-en="Portfolio" data-ar="أعمالي">Portfolio</a></li>
-                <li><a href="#contact" class="nav-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
-            </ul>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo" data-en="Sarah Alqahtani" data-ar="ساره القحطاني">Sarah Alqahtani</div>
+                
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active" data-en="Home" data-ar="الرئيسية">Home</a></li>
+                    <li><a href="#about" class="nav-link" data-en="About" data-ar="نبذة">About</a></li>
+                    <li><a href="#skills" class="nav-link" data-en="Skills" data-ar="المهارات">Skills</a></li>
+                    <li><a href="#certificates" class="nav-link" data-en="Certificates" data-ar="الشهادات">Certificates</a></li>
+                    <li><a href="#projects" class="nav-link" data-en="Projects" data-ar="المشاريع">Projects</a></li>
+                    <li><a href="#education" class="nav-link" data-en="Education" data-ar="التعليم">Education</a></li>
+                    <li><a href="#contact" class="nav-link" data-en="Contact" data-ar="تواصل">Contact</a></li>
+                </ul>
 
-            <div class="nav-controls">
-                <button class="toggle-btn" id="theme-toggle" aria-label="Toggle theme">
-                    <span data-en="🌙 Dark" data-ar="🌙 داكن">🌙 Dark</span>
-                </button>
-                <button class="toggle-btn" id="lang-toggle" aria-label="Toggle language">
-                    <span data-en="AR" data-ar="EN">AR</span>
-                </button>
+                <div class="nav-controls">
+                    <button class="control-btn" id="theme-toggle">
+                        <span class="icon">🌙</span>
+                    </button>
+                    <button class="control-btn" id="lang-toggle">
+                        <span data-en="AR" data-ar="EN">AR</span>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main>
-        <!-- HOME SECTION -->
-        <section id="home">
-            <div class="container">
-                <div class="social-icons">
-                    <a href="https://www.linkedin.com/in/sarahalqahtanieng?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                            <rect x="2" y="9" width="4" height="12"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
-                        </svg>
-                    </a>
-                    <a href="mailto:sarah.am.alqahtani@outlook.com" class="social-icon" aria-label="Email" title="Email">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                    </a>
-                    <a href="https://github.com/sarahalqahtani-eng" target="_blank" class="social-icon" aria-label="GitHub" title="GitHub">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                        </svg>
-                    </a>
-                    <a href="tel:+966535131377" class="social-icon" aria-label="Phone" title="Phone">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                        </svg>
-                    </a>
+    <!-- Home Section -->
+    <section id="home" class="section hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="contact-preview">
+                    <a href="" class="social-icon" id="hero-email" target="_blank">📧</a>
+                    <a href="" class="social-icon" id="hero-phone" target="_blank">📱</a>
+                    <a href="" class="social-icon" id="hero-github" target="_blank">💻</a>
+                    <a href="" class="social-icon" id="hero-linkedin" target="_blank">💼</a>
                 </div>
-
-                <h1 class="hero-title" data-en="Welcome to my portfolio" data-ar="مرحباً بك في معرض أعمالي">
-                    Welcome to my portfolio
-                </h1>
-                <p class="hero-subtitle" data-en="Software Engineering student passionate about AI, Data Analysis, and building impactful solutions" data-ar="طالبة هندسة برمجيات متحمسة للذكاء الاصطناعي وتحليل البيانات وبناء حلول مؤثرة">
-                    Software Engineering student passionate about AI, Data Analysis, and building impactful solutions
-                </p>
-            </div>
-        </section>
-
-        <!-- ABOUT SECTION -->
-        <section id="about">
-            <div class="container">
-                <h2 class="section-title" data-en="About Me" data-ar="نبذة عني">About Me</h2>
-                <div class="about-grid">
-                    <div class="about-text">
-                        <p data-en="I'm Sara, a final-semester Software Engineering student seeking internship opportunities. I'm passionate about leveraging technology to solve real-world problems, with a focus on AI and data-driven solutions." data-ar="أنا ساره، طالبة في الفصل الأخير من هندسة البرمجيات وأبحث عن فرص تدريب. أهتم بتوظيف التقنية لحل المشاكل الحقيقية، مع التركيز على الذكاء الاصطناعي والحلول المعتمدة على البيانات.">
-                            I'm Sara, a final-semester Software Engineering student seeking internship opportunities. I'm passionate about leveraging technology to solve real-world problems, with a focus on AI and data-driven solutions.
-                        </p>
-                    </div>
-                    <div class="interests-box">
-                        <div class="interests-label" data-en="Interested in" data-ar="مهتمة بـ">Interested in</div>
-                        <div id="interests-display">
-                            <div class="interest-item">AI</div>
-                            <div class="interest-item">Data Analysis</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- PORTFOLIO SECTION -->
-        <section id="portfolio">
-            <div class="container">
-                <h2 class="section-title" data-en="Portfolio" data-ar="معرض الأعمال">Portfolio</h2>
                 
-                <div class="tabs">
-                    <button class="tab-btn active" data-tab="skills" data-en="Skills" data-ar="المهارات">Skills</button>
-                    <button class="tab-btn" data-tab="certificates" data-en="Certificates" data-ar="الشهادات">Certificates</button>
-                    <button class="tab-btn" data-tab="projects" data-en="Projects" data-ar="المشاريع">Projects</button>
-                    <button class="tab-btn" data-tab="education" data-en="Education" data-ar="التعليم">Education</button>
-                </div>
-
-                <!-- Skills Tab -->
-                <div class="tab-content active" id="skills-tab">
-                    <div class="grid">
-                         <div class="card">
-                            <h3 class="card-title">Full-Stack Web Developer</h3>
-                            <p class="card-subtitle" data-en="Advanced" data-ar="متقدم">Advanced</p>
-                        </div>
-                        <div class="card">
-                            <h3 class="card-title">Python</h3>
-                            <p class="card-subtitle" data-en="Advanced" data-ar="متقدم">Advanced</p>
-                        </div>
-                        <div class="card">
-                            <h3 class="card-title" data-en="Machine Learning" data-ar="التعلم الآلي">Machine Learning</h3>
-                            <p class="card-subtitle" data-en="Intermediate" data-ar="متوسط">Intermediate</p>
-                        </div>
-                        <div class="card">
-                            <h3 class="card-title" data-en="Data Analysis" data-ar="تحليل البيانات">Data Analysis</h3>
-                            <p class="card-subtitle" data-en="Advanced" data-ar="متقدم">Advanced</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Certificates Tab -->
-                <div class="tab-content" id="certificates-tab">
-                    <div class="grid" id="certificates-container"></div>
-                </div>
-
-                <!-- Projects Tab -->
-                <div class="tab-content" id="projects-tab">
-                    <div class="projects-grid" id="projects-grid"></div>
-                </div>
-
-                <!-- Education Tab -->
-                <div class="tab-content" id="education-tab">
-                    <div class="grid">
-                        <div class="card">
-                            <span class="card-date">2021 - 2026</span>
-                            <h3 class="card-title" data-en="Bachelor of Software Engineering" data-ar="بكالوريوس هندسة البرمجيات">Bachelor of Software Engineering</h3>
-                            <p class="card-subtitle" data-en="University Name - Final Semester" data-ar="اسم الجامعة - الفصل الأخير">University Name - Final Semester</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACT SECTION -->
-        <section id="contact">
-            <div class="container">
-                <h2 class="section-title" data-en="Get In Touch" data-ar="تواصل معي">Get In Touch</h2>
-                <p class="contact-text" data-en="Feel free to reach out for internship opportunities or collaboration" data-ar="لا تتردد في التواصل لفرص التدريب أو التعاون">
-                    Feel free to reach out for internship opportunities or collaboration
+                <h1 class="hero-title" data-en="Welcome to my Portfolio" data-ar="مرحباً بك في معرض أعمالي">
+                    Welcome to my Portfolio
+                </h1>
+                
+                <p class="hero-subtitle" id="hero-subtitle">
+                    Software Engineering student passionate about AI and Data Analysis
                 </p>
-                <div class="social-icons">
-                    <a href="https://www.linkedin.com/in/sarahalqahtanieng?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                            <rect x="2" y="9" width="4" height="12"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
-                        </svg>
-                    </a>
-                    <a href="mailto:sarah.am.alqahtani@outlook.com" class="social-icon" aria-label="Email" title="Email">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                    </a>
-                    <a href="https://github.com/sarahalqahtani-eng" target="_blank" class="social-icon" aria-label="GitHub" title="GitHub">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                        </svg>
-                    </a>
-                    <a href="tel:+966535131377" class="social-icon" aria-label="Phone" title="Phone">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                        </svg>
-                    </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="About Me" data-ar="نبذة عني">About Me</h2>
+            
+            <div class="about-grid">
+                <div class="about-text">
+                    <p id="about-text">Loading...</p>
+                </div>
+                
+                <div class="interests-box">
+                    <h3 class="interests-title" data-en="Interested In" data-ar="مهتمة بـ">Interested In</h3>
+                    <div class="interests-grid" id="interests-container">
+                        <!-- Dynamic interests -->
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Skills" data-ar="المهارات">Skills</h2>
+            
+            <div class="skills-grid">
+                <!-- Technical Skills Card -->
+                <div class="skill-card">
+                    <h3 class="skill-card-title" data-en="Technical Skills" data-ar="المهارات التقنية">Technical Skills</h3>
+                    <div class="skills-list" id="technical-skills">
+                        <!-- Dynamic technical skills -->
+                    </div>
+                </div>
+                
+                <!-- Soft Skills Card -->
+                <div class="skill-card">
+                    <h3 class="skill-card-title" data-en="Soft Skills" data-ar="المهارات الشخصية">Soft Skills</h3>
+                    <div class="skills-list" id="soft-skills">
+                        <!-- Dynamic soft skills -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Certificates" data-ar="الشهادات">Certificates</h2>
+            <div class="cards-grid" id="certificates-container">
+                <!-- Dynamic certificates -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Projects" data-ar="المشاريع">Projects</h2>
+            <div class="projects-grid" id="projects-container">
+                <!-- Dynamic projects -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Education" data-ar="التعليم">Education</h2>
+            <div class="cards-grid" id="education-container">
+                <!-- Dynamic education -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title" data-en="Get In Touch" data-ar="تواصل معي">Get In Touch</h2>
+            <p class="contact-text" data-en="Feel free to reach out!" data-ar="لا تتردد في التواصل!">
+                Feel free to reach out!
+            </p>
+            
+            <div class="contact-icons">
+                <a href="" class="social-icon large" id="contact-email" target="_blank">📧</a>
+                <a href="" class="social-icon large" id="contact-phone" target="_blank">📱</a>
+                <a href="" class="social-icon large" id="contact-github" target="_blank">💻</a>
+                <a href="" class="social-icon large" id="contact-linkedin" target="_blank">💼</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div class="modal" id="certificate-modal">
+        <div class="modal-overlay" onclick="closeCertificateModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeCertificateModal()">✕</button>
+            <div id="certificate-viewer"></div>
+        </div>
+    </div>
 
     <!-- Project Modal -->
     <div class="modal" id="project-modal">
-        <div class="modal-content">
-            <button class="modal-close" aria-label="Close modal">×</button>
-            <h3 class="modal-title" id="modal-title"></h3>
-            <div class="modal-body">
-                <div class="modal-info">
-                    <p class="modal-description" id="modal-description"></p>
-                    <div class="modal-tags" id="modal-tags"></div>
-                    <a href="#" id="modal-github" class="modal-github" target="_blank">
-                        💻 <span data-en="View on GitHub" data-ar="عرض في GitHub">View on GitHub</span>
-                    </a>
+        <div class="modal-overlay" onclick="closeProjectModal()"></div>
+        <div class="modal-content large">
+            <button class="modal-close" onclick="closeProjectModal()">✕</button>
+            <div class="project-modal-body">
+                <div class="project-modal-images" id="project-images">
+                    <!-- Carousel -->
                 </div>
-                <div id="modal-image-container"></div>
+                <div class="project-modal-info">
+                    <h3 id="project-title"></h3>
+                    <p id="project-description"></p>
+                    <div class="project-tools" id="project-tools"></div>
+                    <div class="project-links">
+                        <a href="#" id="project-github" class="btn-primary" target="_blank">
+                            <span data-en="View on GitHub" data-ar="عرض في GitHub">View on GitHub</span>
+                        </a>
+                        <a href="#" id="project-demo" class="btn-secondary" target="_blank" style="display:none;">
+                            <span data-en="View Demo" data-ar="عرض التجربة">View Demo</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- External JavaScript -->
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

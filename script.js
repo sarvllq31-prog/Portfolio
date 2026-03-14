@@ -1,156 +1,103 @@
-// ========== PROJECTS DATA ==========
-const projectsData = [
-    {
-        name: "AI-Powered ECG Monitoring & Arrhythmia Detection",
-        nameAr: "نظام مراقبة ECG وكشف اضطرابات النظم بالذكاء الاصطناعي",
-        preview: "AI system that analyzes ECG signals to detect arrhythmias and support early screening",
-        previewAr: "نظام ذكاء اصطناعي يحلل إشارات ECG لاكتشاف اضطرابات النظم ودعم الكشف المبكر.",
-        description: "Developed an AI-powered solution for ECG monitoring and arrhythmia detection. The project focused on preprocessing ECG signals, training and evaluating a classification model, and presenting results that support early screening. Key work included preparing the dataset, improving signal quality, and validating performance using standard evaluation metrics..",
-        descriptionAr: "وتطوير حل يعتمد على الذكاء الاصطناعي لمراقبة إشارات ECG  اكتشاف اضطرابات نظم القلب. ركّز المشروع على معالجة الإشارة وتنظيف البيانات، تدريب وتقييم نموذج تصنيف، وعرض نتائج تساعد على الكشف المبكر. شمل العمل تجهيز مجموعة البيانات، تحسين جودة الإشارة، والتحقق من الأداء باستخدام مقاييس تقييم معتمدة.",
-        technologies: ["Python", "NumPy", "Pandas", "Matplotlib", "Scikit-learn"],
-        github: "https://github.com/sara-alqahtani/project1",
-        image: "" // ضعي مسار الصورة هنا مثل: "images/project1.jpg"
-    },
-    {
-        name: "Rafiq – Smart Islamic Companion",
-        nameAr: "رفيق – المرافق الإسلامي الذكي",
-        preview: "A mobile application that supports daily Islamic practices through prayer times, adhkar reminders, and smart assistance features.",
-        previewAr: "تطبيق يساعد المستخدمين على تنظيم عباداتهم اليومية من خلال مواقيت الصلاة، الأذكار، وميزات ذكية مساعدة.",
-        description: "Developed a mobile application designed to support daily Islamic practices and enhance spiritual routines. The app provides accurate prayer times, adhkar reminders, and guided daily supplications within a clean and user-friendly interface. The project focused on usability, structured navigation, and performance optimization to ensure a smooth user experience. Additional features included smart notifications and AI-assisted responses to provide helpful and relevant guidance.",
-        descriptionAr: "تم تطوير تطبيق جوال يهدف إلى دعم العبادات اليومية وتعزيز الروتين الروحي للمستخدمين. يوفر التطبيق مواقيت صلاة دقيقة، تذكيرات بالأذكار، وأدعية يومية ضمن واجهة سهلة الاستخدام ومنظمة. ركز المشروع على سهولة الاستخدام، تنظيم التنقل داخل التطبيق، وتحسين الأداء لضمان تجربة سلسة. كما يتضمن إشعارات ذكية وميزات مدعومة بالذكاء الاصطناعي لتقديم إرشادات مفيدة وملائمة.",
-        technologies: ["Flutter", "Dart", "Local Notifications", "API Integration", "AI-assisted features"],
-        github: "https://github.com/sara-alqahtani/project2",
-        image: "" // ضعي مسار الصورة هنا
-    }
-];
+// ============================================
+// PORTFOLIO - MAIN SCRIPT
+// ============================================
 
-// ========== CERTIFICATES DATA ==========
-const certificatesData = [
-    {
-        title: "Fundamentals of Artificial Intelligence",
-        titleAr: "أساسيات الذكاء الاصطناعي",
-        institution: "SDAIA",
-        institutionAr: "سدايا",
-        file: "" // ضعي مسار ملف PDF أو صورة الشهادة هنا مثل: "certificates/ai-cert.pdf"
-    },
-    {
-        title: "Artificial Intelligence Concepts and Advanced Applications",
-        titleAr: "مفاهيم الذكاء الاصطناعي وتطبيقاته المتقدمة",
-        institution: "SDAIA",
-        institutionAr: "سدايا",
-        file: "" // ضعي مسار الملف هنا
-    },
-        {
-        title: "Introduction to Data Science",
-        titleAr: "مقدمة في علم البيانات",
-        institution: "Cisco Network Academy",
-        institutionAr: "سيسكو",
-        file: "" // ضعي مسار ملف PDF أو صورة الشهادة هنا مثل: "certificates/ai-cert.pdf"
-    },
-];
-
-// ========== STATE MANAGEMENT ==========
-let currentLang = localStorage.getItem('lang') || 'en';
-let currentTheme = localStorage.getItem('theme') || 'light';
-let hasAutoScrolled = localStorage.getItem('hasAutoScrolled') === 'true';
+let currentLang = 'en';
+let currentTheme = 'light';
 
 // ========== INITIALIZATION ==========
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     initializeTheme();
     initializeLanguage();
     initializeNavigation();
-    initializeTabs();
-    renderProjects();
-    renderCertificates();
-    initializeProjectModal();
+    await loadAllData();
     initializeScrollAnimations();
-    
-    // Auto-scroll after 2.5 seconds on first visit - REMOVED
-    // Now animations trigger when you actually see the section
 });
 
-// ========== THEME ==========
+// ========== THEME TOGGLE ==========
 function initializeTheme() {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    updateThemeButton();
-}
-
-function toggleTheme() {
-    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    localStorage.setItem('theme', currentTheme);
-    updateThemeButton();
-}
-
-function updateThemeButton() {
-    const btn = document.getElementById('theme-toggle');
-    const span = btn.querySelector('span');
-    if (currentTheme === 'dark') {
-        span.setAttribute('data-en', '☀️ Light');
-        span.setAttribute('data-ar', '☀️ فاتح');
-        span.textContent = currentLang === 'en' ? '☀️ Light' : '☀️ فاتح';
-    } else {
-        span.setAttribute('data-en', '🌙 Dark');
-        span.setAttribute('data-ar', '🌙 داكن');
-        span.textContent = currentLang === 'en' ? '🌙 Dark' : '🌙 داكن';
-    }
-}
-
-document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
-
-// ========== LANGUAGE ==========
-function initializeLanguage() {
-    document.documentElement.lang = currentLang;
-    document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-    updateAllText();
-    updateLangButton();
-}
-
-function toggleLanguage() {
-    currentLang = currentLang === 'en' ? 'ar' : 'en';
-    document.documentElement.lang = currentLang;
-    document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-    localStorage.setItem('lang', currentLang);
-    updateAllText();
-    updateLangButton();
-    renderProjects(); // Re-render projects with new language
-}
-
-function updateAllText() {
-    document.querySelectorAll('[data-en][data-ar]').forEach(el => {
-        el.textContent = el.getAttribute(`data-${currentLang}`);
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    
+    setTheme(savedTheme);
+    
+    themeToggle.addEventListener('click', () => {
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
     });
 }
 
-function updateLangButton() {
-    const btn = document.getElementById('lang-toggle');
-    btn.querySelector('span').textContent = currentLang === 'en' ? 'AR' : 'EN';
+function setTheme(theme) {
+    currentTheme = theme;
+    document.body.className = theme === 'dark' ? 'dark-mode' : 'light-mode';
+    localStorage.setItem('theme', theme);
+    
+    const icon = document.querySelector('#theme-toggle .icon');
+    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
 }
 
-document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
+// ========== LANGUAGE TOGGLE ==========
+function initializeLanguage() {
+    const langToggle = document.getElementById('lang-toggle');
+    const savedLang = localStorage.getItem('language') || 'en';
+    
+    setLanguage(savedLang);
+    
+    langToggle.addEventListener('click', () => {
+        const newLang = currentLang === 'en' ? 'ar' : 'en';
+        setLanguage(newLang);
+    });
+}
+
+function setLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang;
+    localStorage.setItem('language', lang);
+    
+    // Update all elements with data-en and data-ar
+    document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${lang}`);
+    });
+    
+    // Reload dynamic content
+    loadAllData();
+}
 
 // ========== NAVIGATION ==========
 function initializeNavigation() {
-    const navbar = document.getElementById('navbar');
     const navLinks = document.querySelectorAll('.nav-link');
-
-    // Scroll effect
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                const offsetTop = targetSection.offsetTop - 70;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+            
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
+    
+    // Active link on scroll
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-
-        // Active section highlight
         let current = '';
-        document.querySelectorAll('section').forEach(section => {
+        document.querySelectorAll('.section').forEach(section => {
             const sectionTop = section.offsetTop;
-            if (window.scrollY >= sectionTop - 100) {
+            const sectionHeight = section.clientHeight;
+            if (window.pageYOffset >= sectionTop - 100) {
                 current = section.getAttribute('id');
             }
         });
-
+        
         navLinks.forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href') === `#${current}`) {
@@ -160,187 +107,314 @@ function initializeNavigation() {
     });
 }
 
-// ========== TABS ==========
-function initializeTabs() {
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = btn.getAttribute('data-tab');
-            
-            tabBtns.forEach(b => b.classList.remove('active'));
-            tabContents.forEach(c => c.classList.remove('active'));
-            
-            btn.classList.add('active');
-            document.getElementById(`${target}-tab`).classList.add('active');
-        });
-    });
-}
-
-// ========== PROJECTS ==========
-function renderProjects() {
-    const grid = document.getElementById('projects-grid');
-    grid.innerHTML = '';
-    
-    projectsData.forEach((project, index) => {
-        const card = document.createElement('div');
-        card.className = 'project-card';
-        card.innerHTML = `
-            <h3 class="project-name">${currentLang === 'en' ? project.name : project.nameAr}</h3>
-            <p class="project-preview">${currentLang === 'en' ? project.preview : project.previewAr}</p>
-        `;
-        card.addEventListener('click', () => openProjectModal(project));
-        grid.appendChild(card);
-    });
-}
-
-function initializeProjectModal() {
-    const modal = document.getElementById('project-modal');
-    const closeBtn = modal.querySelector('.modal-close');
-    
-    closeBtn.addEventListener('click', () => {
-        modal.classList.remove('active');
-    });
-
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.classList.remove('active');
-        }
-    });
-}
-
-function openProjectModal(project) {
-    const modal = document.getElementById('project-modal');
-    const title = document.getElementById('modal-title');
-    const description = document.getElementById('modal-description');
-    const tags = document.getElementById('modal-tags');
-    const github = document.getElementById('modal-github');
-    const imageContainer = document.getElementById('modal-image-container');
-
-    title.textContent = currentLang === 'en' ? project.name : project.nameAr;
-    description.textContent = currentLang === 'en' ? project.description : project.descriptionAr;
-    
-    // Handle project image
-    if (project.image) {
-        imageContainer.innerHTML = `<img src="${project.image}" alt="${project.name}" class="modal-image">`;
-    } else {
-        imageContainer.innerHTML = `<div class="modal-image-placeholder">📸</div>`;
-    }
-    
-    tags.innerHTML = '';
-    project.technologies.forEach(tech => {
-        const tag = document.createElement('span');
-        tag.className = 'tag';
-        tag.textContent = tech;
-        tags.appendChild(tag);
-    });
-
-    github.href = project.github;
-    modal.classList.add('active');
-}
-
-// ========== INTERESTS - Static Display ==========
-// Interests now display all at once without rotation
-
-// ========== SCROLL-TRIGGERED ANIMATIONS ==========
+// ========== SCROLL ANIMATIONS ==========
 function initializeScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.3, // يشتغل لما 30% من العنصر يظهر
-        rootMargin: '0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Hero title typing effect
-                if (entry.target.classList.contains('hero-title')) {
-                    entry.target.classList.add('typing');
-                }
-                
-                // Hero subtitle fade in
-                if (entry.target.classList.contains('hero-subtitle')) {
-                    setTimeout(() => {
-                        entry.target.classList.add('animate');
-                    }, 2000); // بعد ما يخلص الـ typing
-                }
-                
-                // Interests animation
-                if (entry.target.id === 'interests-display') {
-                    const items = entry.target.querySelectorAll('.interest-item');
-                    items.forEach(item => item.classList.add('animate'));
-                }
-                
-                // Section title animations
-                if (entry.target.classList.contains('section-title')) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-                
-                // Cards animations
-                if (entry.target.classList.contains('card') || 
-                    entry.target.classList.contains('project-card')) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+                entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.card, .skill-card, .project-card').forEach(el => {
+        observer.observe(el);
+    });
+}
 
-    // Observe hero elements
-    const heroTitle = document.querySelector('.hero-title');
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    if (heroTitle) observer.observe(heroTitle);
-    if (heroSubtitle) observer.observe(heroSubtitle);
-    
-    // Observe interests
-    const interestsDisplay = document.getElementById('interests-display');
-    if (interestsDisplay) observer.observe(interestsDisplay);
-    
-    // Observe section titles
-    document.querySelectorAll('.section-title').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'all 0.6s ease';
-        observer.observe(el);
-    });
-    
-    // Observe cards
-    document.querySelectorAll('.card, .project-card').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'all 0.5s ease';
-        observer.observe(el);
-    });
+// ========== LOAD DATA FROM SUPABASE ==========
+async function loadAllData() {
+    try {
+        await Promise.all([
+            loadAbout(),
+            loadInterests(),
+            loadSkills(),
+            loadCertificates(),
+            loadProjects(),
+            loadEducation(),
+            loadContact()
+        ]);
+        console.log('✅ All data loaded');
+    } catch (error) {
+        console.error('❌ Error loading data:', error);
+    }
+}
+
+// ========== ABOUT ==========
+async function loadAbout() {
+    try {
+        const { data, error } = await supabase
+            .from('about')
+            .select('*')
+            .single();
+        
+        if (error) throw error;
+        
+        const aboutText = document.getElementById('about-text');
+        aboutText.textContent = currentLang === 'en' ? data.text_en : data.text_ar;
+    } catch (error) {
+        console.error('Error loading about:', error);
+    }
+}
+
+// ========== INTERESTS ==========
+async function loadInterests() {
+    try {
+        const { data, error } = await supabase
+            .from('interests')
+            .select('*')
+            .order('display_order');
+        
+        if (error) throw error;
+        
+        const container = document.getElementById('interests-container');
+        container.innerHTML = '';
+        
+        data.forEach(interest => {
+            const item = document.createElement('div');
+            item.className = 'interest-item';
+            item.innerHTML = `
+                <div class="interest-icon">${interest.icon}</div>
+                <div class="interest-name">${currentLang === 'en' ? interest.title_en : interest.title_ar}</div>
+            `;
+            container.appendChild(item);
+        });
+    } catch (error) {
+        console.error('Error loading interests:', error);
+    }
+}
+
+// ========== SKILLS ==========
+async function loadSkills() {
+    try {
+        const { data, error } = await supabase
+            .from('skills')
+            .select('*')
+            .order('display_order');
+        
+        if (error) throw error;
+        
+        const technicalContainer = document.getElementById('technical-skills');
+        const softContainer = document.getElementById('soft-skills');
+        
+        technicalContainer.innerHTML = '';
+        softContainer.innerHTML = '';
+        
+        data.forEach(skill => {
+            const skillEl = createSkillElement(skill);
+            if (skill.skill_type === 'technical') {
+                technicalContainer.appendChild(skillEl);
+            } else {
+                softContainer.appendChild(skillEl);
+            }
+        });
+    } catch (error) {
+        console.error('Error loading skills:', error);
+    }
+}
+
+function createSkillElement(skill) {
+    const div = document.createElement('div');
+    div.className = 'skill-item';
+    div.innerHTML = `
+        <div class="skill-header">
+            <span class="skill-name">${currentLang === 'en' ? skill.name_en : (skill.name_ar || skill.name_en)}</span>
+            <span class="skill-percentage">${skill.percentage}%</span>
+        </div>
+        <div class="skill-bar">
+            <div class="skill-progress" style="width: ${skill.percentage}%"></div>
+        </div>
+    `;
+    return div;
 }
 
 // ========== CERTIFICATES ==========
-function renderCertificates() {
-    const container = document.getElementById('certificates-container');
-    if (!container) return;
-    
-    container.innerHTML = '';
-    
-    certificatesData.forEach(cert => {
-        const card = document.createElement('div');
-        card.className = 'card clickable';
-        card.innerHTML = `
-            <h3 class="card-title">${currentLang === 'en' ? cert.title : cert.titleAr}</h3>
-            <p class="card-subtitle">${currentLang === 'en' ? cert.institution : cert.institutionAr}</p>
-        `;
+async function loadCertificates() {
+    try {
+        const { data, error } = await supabase
+            .from('certificates')
+            .select('*')
+            .order('display_order');
         
-        if (cert.file) {
-            card.addEventListener('click', () => {
-                window.open(cert.file, '_blank');
-            });
-        }
+        if (error) throw error;
         
-        container.appendChild(card);
-    });
+        const container = document.getElementById('certificates-container');
+        container.innerHTML = '';
+        
+        data.forEach(cert => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3 class="card-title">${currentLang === 'en' ? cert.title_en : cert.title_ar}</h3>
+                <p class="card-subtitle">${currentLang === 'en' ? cert.organization_en : cert.organization_ar}</p>
+                <p class="card-hint" data-en="Click to view certificate" data-ar="اضغط لعرض الشهادة">
+                    ${currentLang === 'en' ? 'Click to view certificate' : 'اضغط لعرض الشهادة'}
+                </p>
+            `;
+            
+            if (cert.file_url) {
+                card.addEventListener('click', () => openCertificate(cert.file_url));
+            }
+            
+            container.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Error loading certificates:', error);
+    }
 }
 
-// Call render certificates on initialization
-document.addEventListener('DOMContentLoaded', () => {
-    // ... existing code
-    renderCertificates();
-});
+function openCertificate(url) {
+    const modal = document.getElementById('certificate-modal');
+    const viewer = document.getElementById('certificate-viewer');
+    
+    const isPDF = url.toLowerCase().endsWith('.pdf');
+    
+    if (isPDF) {
+        viewer.innerHTML = `<iframe src="${url}" width="100%" height="600px"></iframe>`;
+    } else {
+        viewer.innerHTML = `<img src="${url}" alt="Certificate">`;
+    }
+    
+    modal.classList.add('active');
+}
+
+function closeCertificateModal() {
+    document.getElementById('certificate-modal').classList.remove('active');
+}
+
+// ========== PROJECTS ==========
+async function loadProjects() {
+    try {
+        const { data, error } = await supabase
+            .from('projects')
+            .select('*')
+            .order('display_order');
+        
+        if (error) throw error;
+        
+        const container = document.getElementById('projects-container');
+        container.innerHTML = '';
+        
+        data.forEach(project => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            
+            const imageUrls = Array.isArray(project.image_urls) ? project.image_urls : [];
+            const firstImage = imageUrls[0];
+            
+            card.innerHTML = `
+                ${firstImage 
+                    ? `<img src="${firstImage}" alt="${project.title_en}" class="project-thumbnail">`
+                    : `<div class="project-placeholder">📁</div>`
+                }
+                <div class="project-info">
+                    <h3 class="project-name">${currentLang === 'en' ? project.title_en : project.title_ar}</h3>
+                    <p class="project-short-desc">${currentLang === 'en' ? project.short_desc_en : project.short_desc_ar}</p>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => openProject(project));
+            container.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Error loading projects:', error);
+    }
+}
+
+function openProject(project) {
+    const modal = document.getElementById('project-modal');
+    
+    document.getElementById('project-title').textContent = currentLang === 'en' ? project.title_en : project.title_ar;
+    document.getElementById('project-description').textContent = currentLang === 'en' ? project.full_desc_en : project.full_desc_ar;
+    
+    // Images
+    const imagesContainer = document.getElementById('project-images');
+    const imageUrls = Array.isArray(project.image_urls) ? project.image_urls : [];
+    
+    if (imageUrls.length > 0) {
+        imagesContainer.innerHTML = imageUrls.map(url => 
+            `<img src="${url}" alt="Project" class="project-image">`
+        ).join('');
+    } else {
+        imagesContainer.innerHTML = '<div class="project-placeholder">📸</div>';
+    }
+    
+    // Tools
+    const toolsContainer = document.getElementById('project-tools');
+    const tools = Array.isArray(project.tools) ? project.tools : [];
+    toolsContainer.innerHTML = tools.map(tool => 
+        `<span class="tool-tag">${tool}</span>`
+    ).join('');
+    
+    // Links
+    document.getElementById('project-github').href = project.github_url || '#';
+    
+    const demoBtn = document.getElementById('project-demo');
+    if (project.demo_url) {
+        demoBtn.href = project.demo_url;
+        demoBtn.style.display = 'inline-block';
+    } else {
+        demoBtn.style.display = 'none';
+    }
+    
+    modal.classList.add('active');
+}
+
+function closeProjectModal() {
+    document.getElementById('project-modal').classList.remove('active');
+}
+
+// ========== EDUCATION ==========
+async function loadEducation() {
+    try {
+        const { data, error } = await supabase
+            .from('education')
+            .select('*')
+            .order('display_order');
+        
+        if (error) throw error;
+        
+        const container = document.getElementById('education-container');
+        container.innerHTML = '';
+        
+        data.forEach(edu => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.position = 'relative';
+            card.innerHTML = `
+                <span class="card-date">${edu.start_date} - ${edu.end_date}</span>
+                <h3 class="card-title">${currentLang === 'en' ? edu.degree_en : edu.degree_ar}</h3>
+                <p class="card-subtitle">${currentLang === 'en' ? edu.organization_en : edu.organization_ar}</p>
+            `;
+            container.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Error loading education:', error);
+    }
+}
+
+// ========== CONTACT ==========
+async function loadContact() {
+    try {
+        const { data, error } = await supabase
+            .from('contact')
+            .select('*')
+            .single();
+        
+        if (error) throw error;
+        
+        // Update all contact links
+        const emailLinks = document.querySelectorAll('#hero-email, #contact-email');
+        const phoneLinks = document.querySelectorAll('#hero-phone, #contact-phone');
+        const githubLinks = document.querySelectorAll('#hero-github, #contact-github');
+        const linkedinLinks = document.querySelectorAll('#hero-linkedin, #contact-linkedin');
+        
+        emailLinks.forEach(link => link.href = `mailto:${data.email}`);
+        phoneLinks.forEach(link => link.href = `tel:${data.phone}`);
+        githubLinks.forEach(link => link.href = data.github_url);
+        linkedinLinks.forEach(link => link.href = data.linkedin_url);
+        
+    } catch (error) {
+        console.error('Error loading contact:', error);
+    }
+}
