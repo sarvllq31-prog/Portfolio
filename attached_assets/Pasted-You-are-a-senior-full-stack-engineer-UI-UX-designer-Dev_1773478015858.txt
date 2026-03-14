@@ -1,0 +1,242 @@
+You are a senior full-stack engineer, UI/UX designer, DevOps engineer, and security specialist.
+
+I want you to build a PRODUCTION-LEVEL PORTFOLIO SYSTEM that includes:
+
+Ultra modern animated Portfolio Website
+
+Secure Admin Dashboard
+
+Authentication System
+
+Role-Based Access Control
+
+Supabase Database + Storage integration
+
+Deployment ready for Vercel
+
+SEO optimized
+
+Analytics integrated
+
+This must be clean architecture and scalable.
+
+⭐ Project Architecture
+
+Build using:
+
+React (Vite)
+
+Tailwind CSS
+
+Framer Motion animations
+
+Supabase Client SDK
+
+React Router
+
+Zustand or Context API for state
+
+Lazy loading components
+
+Modular folder structure
+
+⭐ Portfolio Website Requirements
+🌟 Hero Section (VERY PREMIUM)
+
+Full screen 3D / animated gradient background
+
+Floating tech elements animation
+
+My Full Name large typography
+
+Welcome headline
+
+Short intro paragraph
+
+CTA buttons:
+
+View Projects
+
+Contact Me
+
+Glass effect card showing:
+
+Email
+
+Phone
+
+GitHub
+
+LinkedIn
+
+🌟 Sections
+About
+
+Editable text from dashboard
+
+“Interested In” grid with animated 3D icons
+
+Skills
+
+Two categories:
+
+Soft Skills
+
+Technical Skills
+
+Progress bars animated on scroll
+
+Certificates
+
+Certificate cards
+
+Click → open modal viewer (image / PDF)
+
+Projects
+
+Modern project cards
+
+Hover animation
+
+Click → Detailed modal:
+
+Full description
+
+Tools used
+
+GitHub link
+
+Demo link
+
+Image carousel
+
+Education
+
+Timeline style layout
+
+Contact
+
+Contact section at bottom
+
+Contact preview in Hero
+
+⭐ UI/UX Requirements
+
+Glassmorphism
+
+Gradient glow effects
+
+Smooth page transitions
+
+Section reveal animation
+
+Loading screen animation
+
+Cursor hover effects
+
+Skeleton loading states
+
+Fully responsive
+
+Dark Mode
+
+Language toggle system
+
+⭐ ADMIN DASHBOARD SYSTEM
+
+Create secure dashboard with login system.
+
+Use Supabase Auth.
+
+🔐 Roles
+
+Admin → full access
+
+Editor → content editing only
+
+Dashboard Features
+Skills CRUD
+Certificates CRUD + File Upload
+Projects CRUD + Multi Image Upload
+Education CRUD
+About Editing
+Interests Icons Editing
+Contact Editing
+⭐ Database Design (Supabase)
+
+Create tables:
+
+skills
+certificates
+projects
+education
+about
+interests
+contact
+users_roles
+
+Use Supabase Storage buckets:
+
+certificates_files
+
+projects_images
+
+⭐ Security Requirements
+
+Protected dashboard routes
+
+Session persistence
+
+Middleware auth guard
+
+Form validation
+
+Error handling UI
+
+Environment variables usage
+
+⭐ Performance
+
+Lazy loading images
+
+Code splitting
+
+Optimized animations
+
+SEO meta tags
+
+Sitemap generation
+
+Google Analytics integration
+
+⭐ Deployment
+
+Provide Vercel deployment guide
+
+Provide environment variables setup guide
+
+Provide Supabase setup steps
+
+Provide README
+
+⭐ Deliverables
+
+Full working system code
+
+Folder structure
+
+Setup instructions
+
+Deployment steps
+
+Auth testing steps
+
+⭐ IMPORTANT
+
+Fix previous login issue:
+
+Ensure auth redirect works
+
+Ensure session loads correctly
+
+Ensure dashboard accessible only after login

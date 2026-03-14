@@ -4,12 +4,12 @@
 
 let currentLang = 'en';
 let currentTheme = 'light';
-let supabase;
+let supabaseClient;
 
 // Initialize Supabase
 function initSupabase() {
     const { createClient } = window.supabase;
-    supabase = createClient(
+    supabaseClient = createClient(
         window.SUPABASE_CONFIG.url,
         window.SUPABASE_CONFIG.anonKey
     );
@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initializeTheme();
     initializeLanguage();
     initializeNavigation();
+    initializeAdminLogin();
     await loadAllData();
     initializeScrollAnimations();
 });
@@ -150,7 +151,7 @@ async function loadAllData() {
 
 async function loadAbout() {
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('about')
             .select('*')
             .single();
@@ -166,7 +167,7 @@ async function loadAbout() {
 
 async function loadInterests() {
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('interests')
             .select('*')
             .order('display_order');
@@ -192,7 +193,7 @@ async function loadInterests() {
 
 async function loadSkills() {
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('skills')
             .select('*')
             .order('display_order');
@@ -235,7 +236,7 @@ function createSkillElement(skill) {
 
 async function loadCertificates() {
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('certificates')
             .select('*')
             .order('display_order');
@@ -286,7 +287,7 @@ function closeCertificateModal() {
 
 async function loadProjects() {
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('projects')
             .select('*')
             .order('display_order');
@@ -364,7 +365,7 @@ function closeProjectModal() {
 
 async function loadEducation() {
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('education')
             .select('*')
             .order('display_order');
@@ -392,7 +393,7 @@ async function loadEducation() {
 
 async function loadContact() {
     try {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('contact')
             .select('*')
             .single();
@@ -412,4 +413,62 @@ async function loadContact() {
     } catch (error) {
         console.error('Error loading contact:', error);
     }
+}
+// ========== ADMIN LOGIN MODAL ==========
+function initializeAdminLogin() {
+    const adminBtn = document.getElementById('admin-btn');
+    const adminModal = document.getElementById('admin-modal');
+    const adminOverlay = document.getElementById('admin-overlay');
+    const adminClose = document.getElementById('admin-modal-close');
+    const adminForm = document.getElementById('admin-login-form');
+    const adminError = document.getElementById('admin-login-error');
+    const adminSubmit = document.getElementById('admin-submit-btn');
+
+    function openAdminModal() {
+        adminModal.classList.add('active');
+        document.getElementById('admin-email').focus();
+    }
+
+    function closeAdminModal() {
+        adminModal.classList.remove('active');
+        adminError.textContent = '';
+    }
+
+    adminBtn.addEventListener('click', async () => {
+        const { data: { session } } = await supabaseClient.auth.getSession();
+        if (session) {
+            window.location.href = 'admin.html';
+        } else {
+            openAdminModal();
+        }
+    });
+
+    adminOverlay.addEventListener('click', closeAdminModal);
+    adminClose.addEventListener('click', closeAdminModal);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAdminModal();
+    });
+
+    adminForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('admin-email').value;
+        const password = document.getElementById('admin-password').value;
+
+        adminSubmit.disabled = true;
+        adminSubmit.innerHTML = '<span>...</span>';
+        adminError.textContent = '';
+
+        try {
+            const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+            if (error) throw error;
+            window.location.href = 'admin.html';
+        } catch (err) {
+            adminError.textContent = currentLang === 'ar'
+                ? 'خطأ: ' + err.message
+                : 'Login failed: ' + err.message;
+            adminSubmit.disabled = false;
+            adminSubmit.innerHTML = `<span data-en="Sign In" data-ar="دخول">Sign In</span>`;
+        }
+    });
 }

@@ -43,6 +43,9 @@
                     <button class="control-btn" id="lang-toggle">
                         <span data-en="AR" data-ar="EN">AR</span>
                     </button>
+                    <button class="control-btn admin-login-btn" id="admin-btn" title="Admin">
+                        <span class="icon">⚙️</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -194,6 +197,33 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div class="admin-modal" id="admin-modal">
+        <div class="admin-modal-overlay" id="admin-overlay"></div>
+        <div class="admin-modal-card">
+            <button class="admin-modal-close" id="admin-modal-close">✕</button>
+            <div class="admin-modal-header">
+                <div class="admin-modal-icon">⚙️</div>
+                <h2 class="admin-modal-title" data-en="Admin Login" data-ar="دخول المشرف">Admin Login</h2>
+                <p class="admin-modal-sub" data-en="Sign in to manage your portfolio" data-ar="سجّلي الدخول لإدارة محتوى البورتفوليو">Sign in to manage your portfolio</p>
+            </div>
+            <form class="admin-modal-form" id="admin-login-form">
+                <div class="admin-field">
+                    <label data-en="Email" data-ar="البريد الإلكتروني">Email</label>
+                    <input type="email" id="admin-email" placeholder="admin@example.com" required autocomplete="email">
+                </div>
+                <div class="admin-field">
+                    <label data-en="Password" data-ar="كلمة المرور">Password</label>
+                    <input type="password" id="admin-password" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+                <p class="admin-login-error" id="admin-login-error"></p>
+                <button type="submit" class="admin-submit-btn" id="admin-submit-btn">
+                    <span data-en="Sign In" data-ar="دخول">Sign In</span>
+                </button>
+            </form>
         </div>
     </div>
 

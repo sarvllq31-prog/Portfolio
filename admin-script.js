@@ -3,12 +3,12 @@
 // ============================================
 
 let currentUser = null;
-let supabase;
+let supabaseClient;
 
 // Initialize Supabase
 function initSupabase() {
     const { createClient } = window.supabase;
-    supabase = createClient(
+    supabaseClient = createClient(
         window.SUPABASE_CONFIG.url,
         window.SUPABASE_CONFIG.anonKey
     );
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ========== AUTH ==========
 async function checkAuth() {
-    const { data: { session } } = await supabase.auth.getSession();
+    const { data: { session } } = await supabaseClient.auth.getSession();
     
     if (session) {
         currentUser = session.user;
@@ -57,7 +57,7 @@ async function handleLogin(e) {
     const errorEl = document.getElementById('login-error');
     
     try {
-        const { data, error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
             email,
             password
         });
@@ -73,7 +73,7 @@ async function handleLogin(e) {
 
 function initializeLogout() {
     document.getElementById('logout-btn').addEventListener('click', async () => {
-        await supabase.auth.signOut();
+        await supabaseClient.auth.signOut();
         location.reload();
     });
 }
@@ -103,7 +103,7 @@ async function loadAllDashboardData() {
 }
 
 async function loadAboutData() {
-    const { data } = await supabase.from('about').select('*').single();
+    const { data } = await supabaseClient.from('about').select('*').single();
     if (data) {
         document.getElementById('about-text-en').value = data.text_en;
         document.getElementById('about-text-ar').value = data.text_ar;
@@ -114,10 +114,10 @@ async function saveAbout() {
     const textEn = document.getElementById('about-text-en').value;
     const textAr = document.getElementById('about-text-ar').value;
     
-    const { error } = await supabase
+    const { error } = await supabaseClient
         .from('about')
         .update({ text_en: textEn, text_ar: textAr })
-        .eq('id', (await supabase.from('about').select('id').single()).data.id);
+        .eq('id', (await supabaseClient.from('about').select('id').single()).data.id);
     
     if (error) {
         alert('خطأ: ' + error.message);
@@ -127,7 +127,7 @@ async function saveAbout() {
 }
 
 async function loadInterestsData() {
-    const { data } = await supabase.from('interests').select('*').order('display_order');
+    const { data } = await supabaseClient.from('interests').select('*').order('display_order');
     const list = document.getElementById('interests-list');
     list.innerHTML = '';
     
@@ -151,7 +151,7 @@ async function addInterest() {
     const titleAr = document.getElementById('interest-title-ar').value;
     const icon = document.getElementById('interest-icon').value;
     
-    const { error } = await supabase.from('interests').insert({
+    const { error } = await supabaseClientClient.from('interests').insert({
         title_en: titleEn,
         title_ar: titleAr,
         icon: icon
@@ -170,12 +170,12 @@ async function addInterest() {
 
 async function deleteInterest(id) {
     if (!confirm('هل أنت متأكد؟')) return;
-    await supabase.from('interests').delete().eq('id', id);
+    await supabaseClient.from('interests').delete().eq('id', id);
     loadInterestsData();
 }
 
 async function loadSkillsData() {
-    const { data } = await supabase.from('skills').select('*').order('display_order');
+    const { data } = await supabaseClient.from('skills').select('*').order('display_order');
     const list = document.getElementById('skills-list');
     list.innerHTML = '';
     
@@ -201,7 +201,7 @@ async function addSkill() {
     const percentage = document.getElementById('skill-percentage').value;
     const type = document.getElementById('skill-type').value;
     
-    const { error } = await supabase.from('skills').insert({
+    const { error } = await supabaseClientClient.from('skills').insert({
         name_en: nameEn,
         name_ar: nameAr,
         percentage: parseInt(percentage),
@@ -221,12 +221,12 @@ async function addSkill() {
 
 async function deleteSkill(id) {
     if (!confirm('هل أنت متأكد؟')) return;
-    await supabase.from('skills').delete().eq('id', id);
+    await supabaseClient.from('skills').delete().eq('id', id);
     loadSkillsData();
 }
 
 async function loadCertificatesData() {
-    const { data } = await supabase.from('certificates').select('*').order('display_order');
+    const { data } = await supabaseClient.from('certificates').select('*').order('display_order');
     const list = document.getElementById('certificates-list');
     list.innerHTML = '';
     
@@ -259,7 +259,7 @@ async function addCertificate() {
         const file = fileInput.files[0];
         const fileName = `${Date.now()}_${file.name}`;
         
-        const { data: uploadData, error: uploadError } = await supabase.storage
+        const { data: uploadData, error: uploadError } = await supabaseClient.storage
             .from('certificates')
             .upload(fileName, file);
         
@@ -268,14 +268,14 @@ async function addCertificate() {
             return;
         }
         
-        const { data: { publicUrl } } = supabase.storage
+        const { data: { publicUrl } } = supabaseClient.storage
             .from('certificates')
             .getPublicUrl(fileName);
         
         fileUrl = publicUrl;
     }
     
-    const { error } = await supabase.from('certificates').insert({
+    const { error } = await supabaseClientClient.from('certificates').insert({
         title_en: titleEn,
         title_ar: titleAr,
         organization_en: orgEn,
@@ -298,12 +298,12 @@ async function addCertificate() {
 
 async function deleteCertificate(id) {
     if (!confirm('هل أنت متأكد؟')) return;
-    await supabase.from('certificates').delete().eq('id', id);
+    await supabaseClient.from('certificates').delete().eq('id', id);
     loadCertificatesData();
 }
 
 async function loadProjectsData() {
-    const { data } = await supabase.from('projects').select('*').order('display_order');
+    const { data } = await supabaseClient.from('projects').select('*').order('display_order');
     const list = document.getElementById('projects-list');
     list.innerHTML = '';
     
@@ -342,12 +342,12 @@ async function addProject() {
         for (let file of imagesInput.files) {
             const fileName = `${Date.now()}_${file.name}`;
             
-            const { error: uploadError } = await supabase.storage
+            const { error: uploadError } = await supabaseClient.storage
                 .from('project-images')
                 .upload(fileName, file);
             
             if (!uploadError) {
-                const { data: { publicUrl } } = supabase.storage
+                const { data: { publicUrl } } = supabaseClient.storage
                     .from('project-images')
                     .getPublicUrl(fileName);
                 
@@ -356,7 +356,7 @@ async function addProject() {
         }
     }
     
-    const { error } = await supabase.from('projects').insert({
+    const { error } = await supabaseClientClient.from('projects').insert({
         title_en: titleEn,
         title_ar: titleAr,
         short_desc_en: shortEn,
@@ -389,12 +389,12 @@ async function addProject() {
 
 async function deleteProject(id) {
     if (!confirm('هل أنت متأكد؟')) return;
-    await supabase.from('projects').delete().eq('id', id);
+    await supabaseClient.from('projects').delete().eq('id', id);
     loadProjectsData();
 }
 
 async function loadEducationData() {
-    const { data } = await supabase.from('education').select('*').order('display_order');
+    const { data } = await supabaseClient.from('education').select('*').order('display_order');
     const list = document.getElementById('education-list');
     list.innerHTML = '';
     
@@ -422,7 +422,7 @@ async function addEducation() {
     const start = document.getElementById('edu-start').value;
     const end = document.getElementById('edu-end').value;
     
-    const { error } = await supabase.from('education').insert({
+    const { error } = await supabaseClientClient.from('education').insert({
         degree_en: degreeEn,
         degree_ar: degreeAr,
         organization_en: orgEn,
@@ -447,12 +447,12 @@ async function addEducation() {
 
 async function deleteEducation(id) {
     if (!confirm('هل أنت متأكد؟')) return;
-    await supabase.from('education').delete().eq('id', id);
+    await supabaseClient.from('education').delete().eq('id', id);
     loadEducationData();
 }
 
 async function loadContactData() {
-    const { data } = await supabase.from('contact').select('*').single();
+    const { data } = await supabaseClient.from('contact').select('*').single();
     if (data) {
         document.getElementById('contact-email').value = data.email;
         document.getElementById('contact-phone').value = data.phone;
@@ -467,7 +467,7 @@ async function saveContact() {
     const github = document.getElementById('contact-github').value;
     const linkedin = document.getElementById('contact-linkedin').value;
     
-    const { error } = await supabase
+    const { error } = await supabaseClient
         .from('contact')
         .update({
             email,
@@ -475,7 +475,7 @@ async function saveContact() {
             github_url: github,
             linkedin_url: linkedin
         })
-        .eq('id', (await supabase.from('contact').select('id').single()).data.id);
+        .eq('id', (await supabaseClient.from('contact').select('id').single()).data.id);
     
     if (error) {
         alert('خطأ: ' + error.message);
