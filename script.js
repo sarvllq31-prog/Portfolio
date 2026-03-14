@@ -4,9 +4,21 @@
 
 let currentLang = 'en';
 let currentTheme = 'light';
+let supabase;
+
+// Initialize Supabase
+function initSupabase() {
+    const { createClient } = window.supabase;
+    supabase = createClient(
+        window.SUPABASE_CONFIG.url,
+        window.SUPABASE_CONFIG.anonKey
+    );
+    console.log('✅ Supabase initialized');
+}
 
 // ========== INITIALIZATION ==========
 document.addEventListener('DOMContentLoaded', async () => {
+    initSupabase();
     initializeTheme();
     initializeLanguage();
     initializeNavigation();
@@ -55,12 +67,10 @@ function setLanguage(lang) {
     document.documentElement.lang = lang;
     localStorage.setItem('language', lang);
     
-    // Update all elements with data-en and data-ar
     document.querySelectorAll('[data-en][data-ar]').forEach(el => {
         el.textContent = el.getAttribute(`data-${lang}`);
     });
     
-    // Reload dynamic content
     loadAllData();
 }
 
@@ -87,12 +97,10 @@ function initializeNavigation() {
         });
     });
     
-    // Active link on scroll
     window.addEventListener('scroll', () => {
         let current = '';
         document.querySelectorAll('.section').forEach(section => {
             const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
             if (window.pageYOffset >= sectionTop - 100) {
                 current = section.getAttribute('id');
             }
@@ -140,7 +148,6 @@ async function loadAllData() {
     }
 }
 
-// ========== ABOUT ==========
 async function loadAbout() {
     try {
         const { data, error } = await supabase
@@ -157,7 +164,6 @@ async function loadAbout() {
     }
 }
 
-// ========== INTERESTS ==========
 async function loadInterests() {
     try {
         const { data, error } = await supabase
@@ -184,7 +190,6 @@ async function loadInterests() {
     }
 }
 
-// ========== SKILLS ==========
 async function loadSkills() {
     try {
         const { data, error } = await supabase
@@ -228,7 +233,6 @@ function createSkillElement(skill) {
     return div;
 }
 
-// ========== CERTIFICATES ==========
 async function loadCertificates() {
     try {
         const { data, error } = await supabase
@@ -247,9 +251,7 @@ async function loadCertificates() {
             card.innerHTML = `
                 <h3 class="card-title">${currentLang === 'en' ? cert.title_en : cert.title_ar}</h3>
                 <p class="card-subtitle">${currentLang === 'en' ? cert.organization_en : cert.organization_ar}</p>
-                <p class="card-hint" data-en="Click to view certificate" data-ar="اضغط لعرض الشهادة">
-                    ${currentLang === 'en' ? 'Click to view certificate' : 'اضغط لعرض الشهادة'}
-                </p>
+                <p class="card-hint">${currentLang === 'en' ? 'Click to view certificate' : 'اضغط لعرض الشهادة'}</p>
             `;
             
             if (cert.file_url) {
@@ -282,7 +284,6 @@ function closeCertificateModal() {
     document.getElementById('certificate-modal').classList.remove('active');
 }
 
-// ========== PROJECTS ==========
 async function loadProjects() {
     try {
         const { data, error } = await supabase
@@ -327,7 +328,6 @@ function openProject(project) {
     document.getElementById('project-title').textContent = currentLang === 'en' ? project.title_en : project.title_ar;
     document.getElementById('project-description').textContent = currentLang === 'en' ? project.full_desc_en : project.full_desc_ar;
     
-    // Images
     const imagesContainer = document.getElementById('project-images');
     const imageUrls = Array.isArray(project.image_urls) ? project.image_urls : [];
     
@@ -339,14 +339,12 @@ function openProject(project) {
         imagesContainer.innerHTML = '<div class="project-placeholder">📸</div>';
     }
     
-    // Tools
     const toolsContainer = document.getElementById('project-tools');
     const tools = Array.isArray(project.tools) ? project.tools : [];
     toolsContainer.innerHTML = tools.map(tool => 
         `<span class="tool-tag">${tool}</span>`
     ).join('');
     
-    // Links
     document.getElementById('project-github').href = project.github_url || '#';
     
     const demoBtn = document.getElementById('project-demo');
@@ -364,7 +362,6 @@ function closeProjectModal() {
     document.getElementById('project-modal').classList.remove('active');
 }
 
-// ========== EDUCATION ==========
 async function loadEducation() {
     try {
         const { data, error } = await supabase
@@ -393,7 +390,6 @@ async function loadEducation() {
     }
 }
 
-// ========== CONTACT ==========
 async function loadContact() {
     try {
         const { data, error } = await supabase
@@ -403,7 +399,6 @@ async function loadContact() {
         
         if (error) throw error;
         
-        // Update all contact links
         const emailLinks = document.querySelectorAll('#hero-email, #contact-email');
         const phoneLinks = document.querySelectorAll('#hero-phone, #contact-phone');
         const githubLinks = document.querySelectorAll('#hero-github, #contact-github');
